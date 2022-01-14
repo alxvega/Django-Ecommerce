@@ -1,28 +1,20 @@
-{%extends 'base.html'%} {%load static%}
+{%extends 'base.html'%} {%load static%}{%include 'messages.html'%}
 
-<body>
-    {%block content%} {%if messages%} {%for message in messages%}
-    <div class="alert {%if message.tags == 'success'%}alert-success{%else%}alert-danger{%endif%}">
-        <button type="button" class="close" data-dismiss="alert">x</button> {{message}} {%endfor%} {%endif%}
+{%block content%}
+<div class="col">
+    <h1>{{message}}</h1>
+    <ul class="list-group">
+        {% for product in products %}
+        <li class="list-group-item">
+            {{product.title}} {%if product.stock%}
+            <span class="text-success">
+                Disponible</span> {%else%}
+            <span class="text-danger">
+                No disponible
+        </li>
 
-        <div class="col">
-            <h1>{{message}}</h1>
-            <ul class="list-group">
-                {% for product in products %}
-                <li class="list-group-item">
-                    {{product.title}} {%if product.stock%}
-                    <span class="text-success">
-                        Disponible</span> {%else%}
-                    <span class="text-danger">
-                        No disponible
-                </li>
-
-                </span> {%endif%} {%endfor%}
-            </ul>
-
-            <img src="{%static 'media/card 1.jpg'%}" id="xd">
-
-
-        </div>
-    </div>
-    {%endblock%}
+        </span> {%endif%} {%endfor%}
+    </ul>
+    <img src="{%static 'media/card 1.jpg'%}" id="xd">
+</div>
+{%endblock%}
