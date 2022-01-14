@@ -5,9 +5,12 @@
     #xd {
         width: 40%;
     }
-
+    
     body {
-        background-color: #4a5158!important;
+        background-color: #346596!important;
     }
-
     /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+    
+    .form-group {
+        color: rgb(189, 207, 221);
+    }
