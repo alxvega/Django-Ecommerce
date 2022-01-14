@@ -1,7 +1,8 @@
-{%extends 'base.html'%} {%load static%}{%include 'messages.html'%}
+{%extends 'base.html'%} {%include 'messages.html'%} {%load static%}
 
 {%block content%}
 <div class="col">
+
     <h1>{{message}}</h1>
     <ul class="list-group">
         {% for product in products %}
@@ -15,6 +16,8 @@
 
         </span> {%endif%} {%endfor%}
     </ul>
-    <img src="{%static 'media/card 1.jpg'%}" id="xd">
+    <img src="{%static 'media/imagen.jpg'%}" class="img-fluid" alt="Responsive image">
+
 </div>
+
 {%endblock%}
