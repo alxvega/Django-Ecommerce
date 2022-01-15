@@ -9,6 +9,9 @@ from django.contrib.auth.models import User
 
 
 def index(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+
     return render(request, 'index.html', {'message': 'Listado de productos', 'title': 'Productos', 'products': [
 
         {'title': 'Playera', 'price': 5, 'stock': True},
@@ -20,6 +23,8 @@ def index(request):
 
 
 def login_view(request):
+    if request.user.is_authenticated:
+        return redirect('index')
     if request.method == 'POST':
 
         username = request.POST.get('username')
@@ -42,6 +47,8 @@ def logout_view(request):
 
 
 def register_view(request):
+    if request.user.is_authenticated:
+        return redirect('index')
     form = RegisterForm(request.POST or None)
     if request.method == 'POST' and form.is_valid():
         user = form.save()
