@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 from products.views import ProductViewList
+from django.urls import include
 
 
 urlpatterns = [
@@ -24,6 +25,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/login', views.login_view, name='login'),
     path('users/logout', views.logout_view, name='logout'),
-    path('users/register', views.register_view, name='register')
-
+    path('users/register', views.register_view, name='register'),
+    path('productos/',include('products.urls'))
 ]

@@ -3,10 +3,10 @@
 
     <h1>{{message}}</h1>
     <ul class="list-group">
-        {% for product in products %}
+        {% for product in object_list %}
         <li class="list-group-item">
             {{product.title}}
-            <span class="text-sucess">${{product.price}}</span>. {%endfor%}
+            <span class="text-success">${{product.price}}</span>{%endfor%}
         </li>
 
     </ul>
