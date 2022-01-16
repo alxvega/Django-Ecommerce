@@ -6,20 +6,15 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from .forms import RegisterForm
 from django.contrib.auth.models import User
+from products.models import Product
 
 
 def index(request):
     if not request.user.is_authenticated:
         return redirect('login')
 
-    return render(request, 'index.html', {'message': 'Listado de productos', 'title': 'Productos', 'products': [
-
-        {'title': 'Playera', 'price': 5, 'stock': True},
-        {'title': 'Remera', 'price': 4, 'stock': True},
-        {'title': 'Camisa', 'price': 7, 'stock': False},
-        {'title': 'Zapatillas', 'price': 9, 'stock': True}
-
-    ]})
+    products = Product.objects.all().order_by('-id')
+    return render(request, 'index.html', {'message': 'Listado de productos', 'title': 'Productos', 'products': products})
 
 
 def login_view(request):

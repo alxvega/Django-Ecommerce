@@ -1,20 +1,14 @@
-{%extends 'base.html'%} {%include 'messages.html'%} {%load static%}
-
-{%block content%}
+{%extends 'base.html'%} {%include 'messages.html'%} {%load static%} {%block content%}
 <div class="col">
 
     <h1>{{message}}</h1>
     <ul class="list-group">
         {% for product in products %}
         <li class="list-group-item">
-            {{product.title}} {%if product.stock%}
-            <span class="text-success">
-                Disponible</span> {%else%}
-            <span class="text-danger">
-                No disponible
+            {{product.title}}
+            <span class="text-sucess">${{product.price}}</span>. {%endfor%}
         </li>
 
-        </span> {%endif%} {%endfor%}
     </ul>
     <img src="{%static 'media/imagen.jpg'%}" class="img-fluid" alt="Responsive image">
 
