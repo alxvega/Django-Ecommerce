@@ -18,6 +18,7 @@ class ProductViewList(ListView):
         return context
 
 
-class ProductDetailView(DetailView): #Esta clase buscara un objeto mediante un identificador unico
+# Esta clase buscara un objeto mediante un identificador unico
+class ProductDetailView(DetailView):
     model = Product
     template_name = 'products/product.html'
