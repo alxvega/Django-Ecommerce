@@ -1,6 +1,7 @@
 from enum import unique
 from django.db import models
 from django.utils.text import slugify
+from django.db.models.signals import pre_save
 
 
 class Product(models.Model):
@@ -10,9 +11,15 @@ class Product(models.Model):
     slug = models.SlugField(null=False, blank=False, unique=True)
     created = models.DateTimeField(auto_now_add=True)
 
+    # def save(self, *args, **kwargs):
+    #     self.slug = slugify(self.title)
+    #     super(Product, self).save(*args, **kwargs)
+
     def __str__(self):
         return self.title
 
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
-        super(Product, self).save(*args, **kwargs)
+
+def set_slug(sender, instance, *args, **kwargs):
+    instance.slug = slugify(instance.title)
+
+pre_save.connect(set_slug, sender=Product)

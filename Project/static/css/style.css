@@ -7,10 +7,14 @@
     }
     
     body {
-        background-color: #ffffff!important;
+        background-color: #ffffff !important;
     }
     /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
     
     .form-group {
-        color: rgb(189, 207, 221);
+        color: rgb(0, 0, 0);
+    }
+    
+    label {
+        color: black;
     }
