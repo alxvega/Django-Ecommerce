@@ -1,5 +1,5 @@
     h1 {
-        color: rgb(247, 247, 247)
+        color: rgb(190, 106, 106)
     }
     
     #xd {
@@ -7,7 +7,7 @@
     }
     
     body {
-        background-color: #346596!important;
+        background-color: #ffffff!important;
     }
     /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
     
