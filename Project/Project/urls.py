@@ -18,6 +18,8 @@ from django.urls import path
 from . import views
 from products.views import ProductViewList
 from django.urls import include
+from django.conf.urls.static import static
+from django.conf import settings
 
 
 urlpatterns = [
@@ -26,5 +28,9 @@ urlpatterns = [
     path('users/login', views.login_view, name='login'),
     path('users/logout', views.logout_view, name='logout'),
     path('users/register', views.register_view, name='register'),
-    path('productos/',include('products.urls'))
+    path('productos/', include('products.urls'))
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
