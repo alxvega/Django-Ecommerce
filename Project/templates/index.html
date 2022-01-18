@@ -1,15 +1,23 @@
 {%extends 'base.html'%} {%include 'messages.html'%} {%load static%} {%block content%}
+
 <div class="col">
+    <h4 class="text-center">{{message}}</h4>
 
-    <h1>{{message}}</h1>
-    <ul class="list-group">
-        {% for product in object_list %}
-        <li class="list-group-item">
-            {{product.title}}
-            <span class="text-success">${{product.price}}</span>{%endfor%}
-        </li>
-    </ul>
-
+    <div class="row">
+        {%for product in product_list%}
+        <div class="col-3 mt-5">
+            <!--Product-->
+            {%if product.image%}
+            <div class="card h-100">
+                <img src="{{ product.image.url}}" alt="Imagen del producto" height="200px" width="200px">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        {{product.title}}</h5>
+                    <p class="card-text">{{product.description}}</p>
+                    <a href="#" class="btn btn-primary">Ver más</a>
+                </div>
+            </div>
+        </div>{%endif%} {%endfor%}
+    </div>
 </div>
-
 {%endblock%}

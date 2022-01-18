@@ -3,7 +3,7 @@
     {%if product.image%}
     <img src="{{product.image.url}}" alt="Imagen del producto" width="200" height="200">{%endif%}
 </div>
-<div class="col">
+<div>
     <div class="h1">{{product.title}}</div>
     <div class="h5 font-weight-bold">
         Precio: <span class="text-danger">${{product.price}}</span>
@@ -11,9 +11,5 @@
     <div>
         <p>{{product.description}}</p>
     </div>
-
-
-
-
 </div>
 {%endblock%}
