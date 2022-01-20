@@ -34,7 +34,7 @@ class ProductSearchListView(ListView):
     template_name = 'products/search.html'
 
     def get_queryset(self):
-        return Product.objects.filter(title=self.query())
+        return Product.objects.filter(title__icontains=self.query())
 
     def query(self):
         return self.request.GET.get('q')

@@ -5,5 +5,9 @@
     <hr>
     <p>Resultados para {{query}}</p>
 
+    {%for object in product_list%}
+    <div class="row">
+        {%include 'products/snippets/product.html' with product=object%}
+    </div> {%endfor%}
 </div>
 {% endblock content %}
