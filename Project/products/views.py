@@ -1,6 +1,8 @@
 from decimal import getcontext
 from msilib.schema import ListView
+from turtle import title
 from django.shortcuts import render
+from django.template import context
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from .models import Product
@@ -25,4 +27,19 @@ class ProductDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        return context
+
+
+class ProductSearchListView(ListView):
+    template_name = 'products/search.html'
+
+    def get_queryset(self):
+        return Product.objects.filter(title=self.query())
+
+    def query(self):
+        return self.request.GET.get('q')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['query'] = self.query()
         return context
