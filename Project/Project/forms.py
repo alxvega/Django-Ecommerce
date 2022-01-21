@@ -1,5 +1,6 @@
 from django import forms
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User. I'm replacing Django's default User model to use my own
+from users.models import User
 
 
 class RegisterForm(forms.Form):

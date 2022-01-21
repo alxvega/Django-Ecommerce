@@ -7,7 +7,7 @@
     }
     
     body {
-        background-color: #ffffff !important;
+        background-color: #003375 !important;
     }
     /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
     

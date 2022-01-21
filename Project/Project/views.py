@@ -5,7 +5,7 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.contrib import messages
 from .forms import RegisterForm
-from django.contrib.auth.models import User
+from users.models import User  # My own User model
 from products.models import Product
 
 
