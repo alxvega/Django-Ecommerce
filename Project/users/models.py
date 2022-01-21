@@ -1,17 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-
 # Abstractuser
 
 
 class User(AbstractUser):
 
     def get_full_name(self) -> str:
-        return '{} {}'.format(self.first_name, self.last_name)
-    
-    
-    
+        return ('{} {}'.format(self.first_name, self.last_name))
     
 
 
