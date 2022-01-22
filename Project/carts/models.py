@@ -12,4 +12,4 @@ class Cart(models.Model):
     created = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return ''
+        return '__'
