@@ -1,16 +1,10 @@
+from pickle import NONE
+from webbrowser import get
 from django.shortcuts import render
 from .models import Cart
+from .utils import get_or_create_cart
 
 
 def cart(request):
-    # Lo reescribi de nuevo porque reabri el codigo y no lo entendia jaja
-    user = request.user if request.user.is_authenticated else None
-    cart_id = request.session.get('cart_id')
-    if cart_id:
-        cart = Cart.objects.get(pk=cart_id)
-    else:
-        cart = Cart.objects.create(user=user)
-
-    request.session['cart_id'] = cart.id
-
+    cart = get_or_create_cart(request)
     return render(request, 'carts/cart.html', {})
