@@ -1,4 +1,6 @@
 from enum import unique
+from unicodedata import decimal
+import decimal
 from django.db import models
 from users.models import User
 from products.models import Product
@@ -16,17 +18,22 @@ class Cart(models.Model):
     subtotal = models.DecimalField(default=0.0, max_digits=8, decimal_places=2)
     total = models.DecimalField(default=0.0, max_digits=8, decimal_places=2)
     created = models.DateField(auto_now_add=True)
-    FEE = 0.5
+    FEE = 0.05
 
     def __str__(self):
         return (f'{self.cart_id}')
 
     def update_totals(self):
         self.update_subtotal()
-        self.update_total = self.subtotal + (self.subtotal * decimal.Decimal(self.Fee))
+        self.update_total()
 
     def update_subtotal(self):
+        # List comprehension to be able to iterate the products in the cart
         self.subtotal = sum([product.price for product in self.products.all()])
+        self.save()
+
+    def update_total(self):
+        self.total = self.subtotal + (self.subtotal * decimal.Decimal(Cart.FEE))
         self.save()
 
 
@@ -41,3 +48,4 @@ def update_totals(sender, instance, action, *args, **kwargs):
 
 
 pre_save.connect(set_cart_id, sender=Cart)
+m2m_changed.connect(update_totals, sender=Cart.products.through)
