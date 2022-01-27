@@ -18,12 +18,11 @@ def cart(request):
 def add(request):
     cart = get_or_create_cart(request)
     product = Product.objects.get(pk=request.POST.get('product_id'))
-    quantity = request.POST.get('quantity', 1)
-    cart_product = CartProducts.objects.create(cart=cart,
-                                               product=product,
-                                               quantity=quantity)
-    
-
+    # Important to parse it to be able to sum objects.
+    quantity = int(request.POST.get('quantity', 1))
+    cart_product = CartProducts.objects.create_or_update_quantity(cart=cart,
+                                                                  product=product,
+                                                                  quantity=quantity)
 
     return render(request, 'carts/add.html', {'product': product})
 
