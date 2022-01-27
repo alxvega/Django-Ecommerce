@@ -10,11 +10,12 @@ import uuid
 
 
 class Cart(models.Model):
+
     cart_id = models.CharField(
         max_length=100, null=False, blank=False, unique=True)
     user = models.ForeignKey(
         User, null=True, blank=True, on_delete=models.CASCADE)
-    products = models.ManyToManyField(Product)
+    products = models.ManyToManyField(Product, through='CartProducts')
     subtotal = models.DecimalField(default=0.0, max_digits=8, decimal_places=2)
     total = models.DecimalField(default=0.0, max_digits=8, decimal_places=2)
     created = models.DateField(auto_now_add=True)
@@ -33,8 +34,27 @@ class Cart(models.Model):
         self.save()
 
     def update_total(self):
-        self.total = self.subtotal + (self.subtotal * decimal.Decimal(Cart.FEE))
+        self.total = self.subtotal + \
+            (self.subtotal * decimal.Decimal(Cart.FEE))
         self.save()
+
+    def products_related(self):
+        return self.cartproducts_set.select_related('product')
+
+
+class CartProductsManager(models.Manager):
+    def create_or_update_quantity(self, cart, product, quantity=1):
+        self.get_or_create(cart=cart, product=product)
+
+
+# I need to stablish a relationship with cart and products. A cart can have many cart products and a certain product can have many carts
+
+
+class CartProducts(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+    created = models.DateField(auto_now_add=True)
 
 
 def set_cart_id(sender, instance, *args, **kwargs):
