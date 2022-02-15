@@ -30,7 +30,7 @@ urlpatterns = [
     path('users/register', views.register_view, name='register'),
     path('productos/', include('products.urls')),
     path('carrito/', include('carts.urls')),
-    path('order', include('orders.urls'))
+    path('orden/', include('orders.urls')),
 ]
 
 if settings.DEBUG:
