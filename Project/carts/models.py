@@ -28,9 +28,8 @@ class Cart(models.Model):
     def update_totals(self):
         self.update_subtotal()
         self.update_total()
-        order = self.order_set.first()
-        if order:
-            order.update_total()
+        if self.order:
+            self.order.update_total()
 
     def update_subtotal(self):
         # List comprehension to be able to iterate the products in the cart
@@ -45,6 +44,10 @@ class Cart(models.Model):
 
     def products_related(self):
         return self.cartproducts_set.select_related('product')
+    
+    @property
+    def order(self):
+        return self.order_set.first()
 
 
 class CartProductsManager(models.Manager):

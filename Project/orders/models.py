@@ -1,7 +1,6 @@
 from django.db import models
 from django.db.models.signals import pre_save
 import uuid
-
 from enum import Enum, unique
 from django.db import models
 from users.models import User
@@ -45,7 +44,7 @@ class Order(models.Model):
 
 def set_order_id(sender, instance, *args, **kwargs):
     if not instance.order_id:
-        instance.order_id = uuid.uuid4()
+        instance.order_id = str(uuid.uuid4())
 
 
 def set_total(sender, instance, *args, **kwargs):
