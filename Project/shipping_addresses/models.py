@@ -1,6 +1,7 @@
 from django.db import models
 from users.models import User
 
+
 class ShippingAddress(models.Model):
     user = models.ForeignKey(
         User, null=False, blank=False, on_delete=models.CASCADE)
@@ -16,3 +17,7 @@ class ShippingAddress(models.Model):
 
     def __str__(self):
         return self.postal_code
+
+    @property
+    def address(self):
+        return '{} - {} - {}'.format(self.city, self.state, self.country)
