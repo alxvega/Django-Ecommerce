@@ -11,9 +11,12 @@
             <li class="nav-item {%if request.path == cart%}active{%endif%}">
                 <a href="{{cart}}" class="nav-link"><span class="fa fa-shopping-cart"></span> Mi carrito</a>
             </li>
+            {% if user.is_authenticated %}
             <li class="nav-item {%if request.path == shipping_addresses%}active{%endif%}">
-                <a href="{{shipping_addresses}}" class="nav-link"><span class="fas fa-location-arrow"></span> Mis direcciones</a>
-            </li>
+                <a href="{{shipping_addresses}}" class="nav-link"><span class="fas fa-location-arrow"></span> Mis
+                    direcciones</a>
+            </li>{% endif %}
+
         </ul>
         <ul class="nav navbar-nav ml-auto">
             {%if user.is_authenticated %}

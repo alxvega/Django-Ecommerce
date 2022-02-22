@@ -3,9 +3,12 @@ from django.contrib import messages
 from .forms import ShippingAddressForm
 from .models import ShippingAddress
 from django.views.generic import ListView
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class ShippingAddressListView(ListView):
+class ShippingAddressListView(LoginRequiredMixin, ListView):
+    login_url = 'login'
     model = ShippingAddress
     template_name = 'shipping_addresses/shipping_addresses.html'
 
@@ -13,6 +16,7 @@ class ShippingAddressListView(ListView):
         return ShippingAddress.objects.filter(user=self.request.user).order_by('-default')
 
 
+@login_required(login_url='login')
 def create(request):
     form = ShippingAddressForm(request.POST or None)
 
@@ -29,5 +33,5 @@ def create(request):
 
         messages.success(request, 'Dirección creada exitosamente')
         return redirect('shipping_addresses:shipping_addresses')
-    
+
     return render(request, 'shipping_addresses/create.html', {'form': form})
