@@ -13,5 +13,10 @@ class ShippingAddressListView(ListView):
 
 
 def create(request):
-    form = ShippingAddressForm()
+    form = ShippingAddressForm(request.POST or None)
+    
+    if request.method == 'POST' and form.is_valid():
+        shipping_address = form.save(commit=False)
+        shipping_address.user = request.user
+        shipping_address.save()
     return render(request, 'shipping_addresses/create.html', {'form': form})
